@@ -1,0 +1,49 @@
+﻿@model HardCodeProject.Models.ViewModels.ViewProduct
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout";
+}
+
+<h1>Create</h1>
+
+@Html.ActionLink("Back To List", "Index",
+         new { controller = "Main" },
+         new { @class = "btn btn-success" })
+
+<form method = "post" action="Create" class="mt-5w">
+    <div class="mb-3">
+        <label for="" class="form-label">Img link Product</label>
+        <input name="Img" id="Img" type="url" class="form-control" asp-for="Img"/>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Name Product</label>
+        <input name ="Name" id="Name" type="text" class="form-control" asp-for="Name" />
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Description Product</label>
+        <input name="Description" id="Description" type="text" class="form-control" asp-for="Description" />
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Count Prouct</label>
+        <input name="Count" id="Count" type="number" class="form-control" asp-for="Count" />
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Category Product</label>
+        <select name="Category" id="Category" asp-for="Category">
+            @foreach(var item in ViewBag.Message)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+    @Html.ActionLink("Create Category", "CreateCategory",
+    new { controller = "Main" },
+    new { @class = "btn btn-primary" })
+
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

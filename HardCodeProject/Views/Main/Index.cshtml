@@ -1,0 +1,84 @@
+﻿@model List<HardCodeProject.Models.ProductViewModel>
+ 
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@{
+    Layout = "_Layout";
+    List<HardCodeProject.Models.CategoryViewModel> obj = ViewBag.Categories;
+}
+
+@Html.ActionLink("Create", "Create",  new { controller = "Main" }, new { @class = "btn btn-success" })
+@Html.ActionLink("Create Category", "CreateCategory",
+         new { controller = "Main" },
+         new { @class = "btn btn-primary" })
+         <br />
+<br />
+<h2>List Products</h2>
+<br />
+<br />
+
+<table class="table" style="text-align:center;  ">
+    <thead>
+        <tr>
+            <form method="post" action="Index">
+                <th>
+                <button class="notBtn" name="filter" type="submit" value="ProductName">@Html.DisplayNameFor(model => model[0].NameProduct)</button>
+                </th>
+                <th>
+                <button class="notBtn" name="filter" type="submit" value="DescriptionProduct">@Html.DisplayNameFor(model => model[0].DescriptionProduct)</button>
+                </th>
+                <th>
+                <button class="notBtn" name="filter" type="submit" value="CountProduct">@Html.DisplayNameFor(model => model[0].CountProduct)</button>
+                </th>
+                <th >
+                <button class="notBtn" name="filter" type="submit" value="CategoryProduct">@Html.DisplayNameFor(model => model[0].CategoryId)</button>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].ImgProduct)
+                </th>
+                <th></th>
+            </form>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr style="text-align:center;">
+             
+            <td style="padding:30px"> 
+                @Html.DisplayFor(modelItem => item.NameProduct)
+            </td>
+
+            <td style="padding:30px">
+                @Html.DisplayFor(modelItem => item.DescriptionProduct)
+            </td>
+
+            <td style="padding:30px">
+                @Html.DisplayFor(modelItem => item.CountProduct)
+            </td >
+
+            <td style="padding:30px">
+                    <a>@obj.FirstOrDefault(c=>c.Id == item.CategoryId).Name | @obj.FirstOrDefault(c=>c.Id == item.CategoryId).Id</a>
+            </td>
+
+            <td style="padding:30px">
+                    <img src="@Html.DisplayFor(modelItem => item.ImgProduct)" width="100px" height="100px">
+            </td>
+
+            <td style="padding:50px">
+                    @Html.ActionLink("Take a Closer Look", "CloserLook", new {controller="Main", @id = item.Id}, new { @class = "btn btn-dark" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<style>
+    .notBtn{
+        border:0px;
+        background-color:white;
+        font-size:17px;
+        font-weight:700;
+    }
+</style>

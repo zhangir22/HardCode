@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HardCodeProject.Models.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "IndexCategory";
+    Layout = "_Layout";
+}
+
+<h1>IndexCategory</h1>
+
+@Html.ActionLink("Create Category", "CreateCategory",
+         new { controller = "Main" },
+         new { @class = "btn btn-primary" })
+@Html.ActionLink("Back To List", "Index",
+         new { controller = "Main" },
+         new { @class = "btn btn-success" })
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteCategory", new {controller="Main", @id = item.Id}, new { @class = "btn btn-danger" })
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
